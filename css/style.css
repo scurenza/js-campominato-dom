@@ -90,3 +90,23 @@ select{
 label{
     margin-right: 1rem;
 }
+
+.hidden {
+    display: none;
+}
+
+.game{
+    width: 100%;
+    padding: 2rem;
+    font-size: 3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#result{
+    color: red;
+    border: 3px solid red;
+    padding: 1rem;
+}

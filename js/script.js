@@ -14,7 +14,9 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 // Dati
 const btn = document.getElementById("btn");
 const container = document.querySelector(".square-container");
+const counter = document.getElementById("result");
 
+let isGameOver = false;
 
 
 // Creazione della griglia al click del bottone
@@ -22,16 +24,25 @@ btn.addEventListener ("click" , function() {
 
     // "Pulisco" il container
     container.innerHTML = "";
+    counter.innerHTML = "";
+    clickNum = 1;
+    scoreboard.classList.add("hidden");
+    isGameOver = false;
     
     // Prendo l'input della difficoltà
     const difficulty = parseInt( document.getElementById("difficulty").value);
     
     console.log(difficulty);
+    arrayBomb = rndBomb(difficulty);
+    console.log(arrayBomb);  
 
     // Creazione degli elementi uno ad uno
     for(let i = 1; i <= difficulty; i++) {
         const num = i;
         const thisSquare = createSquares(num);
+
+        
+        
 
         // Differenziazione della griglia in base alla difficoltà scelta
         if (difficulty === 100) {
@@ -44,12 +55,18 @@ btn.addEventListener ("click" , function() {
 
         // aggiungo la funzione active sullo square al click
         thisSquare.addEventListener("click", actionOnSquares);
+        
 
         // Inserisco gli elemento dentro il container
         container.append(thisSquare);
     }
 
+        
+        
+    
 });
+
+
 
 
 // Funzione per creare gli squares -- Condizione panelSize ancora da aggiungere
@@ -69,22 +86,48 @@ function createSquares (innerNum) {
 
 // Funzione per colorare gli square e stampare il numero in console
 
-
+let clickNum = 1;
 /**
  * Description
  * @returns {background color}
  */
 
 function actionOnSquares () {
+    if(!isGameOver) {
     const squareNum = parseInt(this.textContent);
+    const scoreboard = document.getElementById("scoreboard");
+    const win = document.getElementById("win");
+    
+    
+    
     if (arrayBomb.includes(squareNum)) {
         this.classList.add("red");
-        console.log("Bomba num:",squareNum);
+        isGameOver = true;
+        
+        console.log("Bomba num:",squareNum," Numero di click:",clickNum);
+        counter.innerHTML = clickNum;
+        scoreboard.classList.remove("hidden");
+
+        let allSquares = document.querySelectorAll(".square");
+        console.log(allSquares);
+        
+        for (let i = 0; i < arrayBomb.length; i++) {
+            allSquares[arrayBomb[i] - 1].classList.add("red");
+        }
     } else {
     this.classList.add("blue");
-    console.log("Cella num:",squareNum);
+    
+    console.log("Cella num:",squareNum," Numero di click:",clickNum);
+    }
+
+    clickNum++;
+
+    if (clickNum === parseInt(document.getElementById("difficulty").value) - 15 ) {
+        win.classList.remove("hidden");
     }
 }
+}
+
 
 
 
@@ -107,10 +150,14 @@ con difficoltà 3 => tra 1 e 49
 ****3- quando si clicca su una bomba e finisce la partita, il software scopre tutte le bombe nascoste */
 
 
-const arrayBomb = rndBomb(49);
-console.log(arrayBomb);                
+              
 
-// Funzione per creare le bombe
+// 
+/**
+ * Description Funzione per creare le bombe
+ * @param {number} maxSquares // prelevo il livello di difficoltà
+ * @returns {array} array con bombe tutte diverse tra loro
+ */
 function rndBomb (maxSquares) {
     let bombs = [];
     while (bombs.length < 16) {
@@ -121,4 +168,5 @@ function rndBomb (maxSquares) {
     }
     return bombs;
 }
+
 
