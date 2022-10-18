@@ -74,6 +74,10 @@ input {
     background-color: blue;
 }
 
+.red {
+    background-color: red;
+}
+
 .select-btn{
     margin-right: 2rem;
 }
