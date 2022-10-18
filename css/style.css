@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: aqua;
+}
+
+/* Containers */
+.container {
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square-container{
+    height: 800px;
+    width: 800px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Squares */
+.square {
+
+    border: 2px solid green;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lg.square {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+}
+
+.md.square{
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+.sm.square{
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+/* HEADER */
+header{
+    width: 100%;
+    height: 15vh;
+    background-color: white;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+input {
+    width: 100px;
+    height: 50px;
+    margin-right: 6rem;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.select-btn{
+    margin-right: 2rem;
+}
+
+select{
+    width: 75px;
+    height: 40px;
+}
+
+label{
+    margin-right: 1rem;
+}
